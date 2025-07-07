@@ -32,12 +32,13 @@ const submitHandler = async (e) => {
     dispatch(setLoading(true));
 
     // ✅ Set withCredentials globally (do this ONCE)
-    axios.defaults.withCredentials = true;
+    
 
     const res = await axios.post(`${USER_API_END_POINT}/login`, input, {
       headers: {
         "Content-Type": "application/json",
       },
+      withCredentials : true;
     });
 
     if (res.data.success) {
