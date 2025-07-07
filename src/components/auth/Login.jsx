@@ -34,7 +34,7 @@ const Login = () => {
         headers: {
           "Content-Type": "application/json",
         },
-        withCredentials: true,
+        axios.defaults.withCredentials = true;
       });
       if (res.data.success) {
         dispatch(setUser(res.data.user));
