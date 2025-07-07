@@ -26,28 +26,33 @@ const Login = () => {
     setInput({ ...input, [e.target.name]: e.target.value });
   };
 
-  const submitHandler = async (e) => {
-    e.preventDefault();
-    try {
-      dispatch(setLoading(true));
-      const res = await axios.post(`${USER_API_END_POINT}/login`, input, {
-        headers: {
-          "Content-Type": "application/json",
-        },
-        axios.defaults.withCredentials = true;
-      });
-      if (res.data.success) {
-        dispatch(setUser(res.data.user));
-        navigate("/");
-        toast.success(res.data.message);
-      }
-    } catch (error) {
-      console.log(error);
-      toast.error(error.response?.data?.message || "Login failed");
-    } finally {
-      dispatch(setLoading(false));
+const submitHandler = async (e) => {
+  e.preventDefault();
+  try {
+    dispatch(setLoading(true));
+
+    // ✅ Set withCredentials globally (do this ONCE)
+    axios.defaults.withCredentials = true;
+
+    const res = await axios.post(`${USER_API_END_POINT}/login`, input, {
+      headers: {
+        "Content-Type": "application/json",
+      },
+    });
+
+    if (res.data.success) {
+      dispatch(setUser(res.data.user));
+      navigate("/");
+      toast.success(res.data.message);
     }
-  };
+  } catch (error) {
+    console.log(error);
+    toast.error(error.response?.data?.message || "Login failed");
+  } finally {
+    dispatch(setLoading(false));
+  }
+};
+
 
   useEffect(() => {
     if (user) navigate("/");
