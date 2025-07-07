@@ -38,7 +38,7 @@ const submitHandler = async (e) => {
       headers: {
         "Content-Type": "application/json",
       },
-      withCredentials : true;
+       withCredentials: true,
     });
 
     if (res.data.success) {
