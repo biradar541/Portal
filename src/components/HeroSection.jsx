@@ -39,8 +39,7 @@ const HeroSection = () => {
         </h1>
 
         <p className="text-sm sm:text-base text-gray-600">
-          Lorem ipsum dolor sit amet consectetur adipisicing elit. Aliquid
-          aspernatur temporibus nihil tempora dolor!
+         Discover thousands of jobs across tech, design, and business roles. Explore top companies, find the right fit, and take your career to the next level.
         </p>
 
         <div className="flex w-full sm:w-[90%] md:w-[70%] lg:w-[50%] mx-auto border border-gray-200 shadow-lg pl-4 pr-1 py-1 rounded-full items-center gap-2 sm:gap-4">
