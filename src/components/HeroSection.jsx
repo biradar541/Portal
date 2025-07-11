@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Button } from "./ui/button";
 import { Search } from "lucide-react";
 import { useDispatch } from "react-redux";
@@ -10,9 +10,20 @@ const HeroSection = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
+  // ✅ Clear filters when this component mounts
+  useEffect(() => {
+    dispatch(setSearchedQuery(""));
+  }, [dispatch]);
+
   const searchJobHandler = () => {
-    dispatch(setSearchedQuery(query));
+    dispatch(setSearchedQuery(query.trim()));
     navigate("/browse");
+  };
+
+  const handleKeyDown = (e) => {
+    if (e.key === "Enter") {
+      searchJobHandler();
+    }
   };
 
   return (
@@ -36,7 +47,9 @@ const HeroSection = () => {
           <input
             type="text"
             placeholder="Find your dream jobs"
+            value={query}
             onChange={(e) => setQuery(e.target.value)}
+            onKeyDown={handleKeyDown}
             className="outline-none border-none w-full text-sm sm:text-base"
           />
           <Button
